@@ -58,7 +58,7 @@ pgespresso_start_backup(PG_FUNCTION_ARGS)
 
 	backupidstr = text_to_cstring(backupid);
 
-	if (!superuser() && !has_rolreplication(GetUserId()))
+	if (!superuser())
 		ereport(ERROR,
 				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
 		   errmsg("must be superuser or replication role to run a backup")));
@@ -109,7 +109,7 @@ pgespresso_stop_backup(PG_FUNCTION_ARGS)
 
 	backupidstr = text_to_cstring(labelfile);
 
-	if (!superuser() && !has_rolreplication(GetUserId()))
+	if (!superuser())
 		ereport(ERROR,
 				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
 		 (errmsg("must be superuser or replication role to run a backup"))));
@@ -165,7 +165,7 @@ pgespresso_stop_backup(PG_FUNCTION_ARGS)
 Datum
 pgespresso_abort_backup(PG_FUNCTION_ARGS)
 {
-	if (!superuser() && !has_rolreplication(GetUserId()))
+	if (!superuser())
 		ereport(ERROR,
 				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
 		 (errmsg("must be superuser or replication role to run a backup"))));
